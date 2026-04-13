@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interface Robot</title>
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#1a1a1a" />
+    <link rel="apple-touch-icon" href="icon-192.png" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Contrôle du robot</h1>
+
+    <div class="container-global">
+      <div class="colonne-capteurs">
+        <div class="panneau">
+          <h3>📊 Distance</h3>
+          <p><span id="valeurDistance">--</span> cm</p>
+        </div>
+        <div class="panneau">
+          <h3>🌡️ Température</h3>
+          <p><span id="valeurTemperature">--</span> °C</p>
+        </div>
+        <div class="panneau">
+          <h3>☀️ Luminosité</h3>
+          <p><span id="valeurLumiere">--</span> %</p>
+        </div>
+        <div class="panneau">
+          <h3>🔥 Feu</h3>
+          <p id="alerteFeu">Pas de danger</p>
+          <small>Valeur: <span id="valeurFeu">--</span></small>
+        </div>
+        <div class="panneau">
+          <h3>🧲 Magnétisme</h3>
+          <p id="alerteMag">Rien à signaler</p>
+        </div>
+        <div class="panneau">
+          <h3>🏃 Mouvement</h3>
+          <p id="valeurMouvement">R.A.S 🟢</p>
+        </div>
+      </div>
+
+      <div class="colonne-commandes">
+        <div class="section-connexion">
+          <button id="btnConnect">🔗 Connecter le Robot</button>
+          <p id="status">Statut : Déconnecté</p>
+        </div>
+
+        <div class="section-direction">
+          <h3>🕹️ Direction</h3>
+          <div class="manette">
+            <button class="btn-dir" id="btnAvantGauche">↖️</button>
+            <button class="btn-dir" id="btnHaut">⬆️</button>
+            <button class="btn-dir" id="btnAvantDroite">↗️</button>
+            <div class="vide"></div>
+            <button class="btn-dir" id="btnStop">🛑</button>
+            <div class="vide"></div>
+            <button class="btn-dir" id="btnArriereGauche">↙️</button>
+            <button class="btn-dir" id="btnBas">⬇️</button>
+            <button class="btn-dir" id="btnArriereDroite">↘️</button>
+          </div>
+        </div>
+
+        <div class="section-vision">
+          <h3>👁️ Champ de vision</h3>
+          <input type="range" id="sliderServo" min="0" max="180" value="90" />
+          <p>Angle : <span id="valeurAngle">90</span>°</p>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

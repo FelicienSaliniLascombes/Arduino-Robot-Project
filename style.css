@@ -1,0 +1,157 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* --- Style global --- */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 20px;
+  background-color: #1a1a1a; /* Fond encore plus sombre */
+  color: #e0e0e0;
+}
+
+h1 {
+  margin-bottom: 30px;
+  font-weight: 300;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+/* --- Structure en colonnes (Dashboard) --- */
+.container-global {
+  display: grid;
+  grid-template-columns: 350px 1fr; /* Colonne capteurs fixe, commandes flexible */
+  gap: 25px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* --- Style commun pour tous les blocs (Glassmorphism léger) --- */
+.colonne-capteurs,
+.section-connexion,
+.section-direction,
+.section-vision {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* --- Colonne Gauche (Capteurs) --- */
+.colonne-capteurs {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.panneau {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  border-radius: 12px;
+  text-align: left;
+  border-left: 4px solid #444; /* Petite barre discrète à gauche */
+  transition: all 0.3s ease;
+}
+
+.panneau:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateX(5px);
+}
+
+.panneau h3 {
+  font-size: 14px;
+  margin: 0;
+  color: #888;
+  text-transform: uppercase;
+}
+
+.panneau p {
+  margin: 8px 0 0 0;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+/* --- Colonne Droite (Commandes) --- */
+.colonne-commandes {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* Bouton Connexion */
+#btnConnect {
+  padding: 12px 25px;
+  font-size: 16px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#btnConnect:hover {
+  background-color: #218838;
+  box-shadow: 0 0 15px rgba(40, 167, 69, 0.4);
+}
+
+/* --- Manette --- */
+.manette {
+  display: grid;
+  grid-template-columns: repeat(3, 85px);
+  grid-template-rows: repeat(3, 85px);
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.btn-dir {
+  width: 85px;
+  height: 85px;
+  font-size: 28px;
+  background-color: #333;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-dir:active {
+  background-color: #007bff;
+  transform: scale(0.9);
+}
+
+#btnStop {
+  background-color: #b02a37;
+}
+
+/* --- Vision / Slider --- */
+#sliderServo {
+  width: 100%;
+  margin: 20px 0;
+  accent-color: #007bff;
+}
+
+/* --- Couleurs dynamiques pour les valeurs --- */
+#valeurDistance {
+  color: #00d4ff;
+}
+#valeurTemperature {
+  color: #ff9800;
+}
+#valeurLumiere {
+  color: #ffeb3b;
+}
+
+/* Responsivité */
+@media (max-width: 900px) {
+  .container-global {
+    grid-template-columns: 1fr;
+  }
+}
