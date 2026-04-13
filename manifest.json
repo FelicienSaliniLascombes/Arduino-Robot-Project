@@ -1,6 +1,6 @@
 {
-  "name": "Télécommande Robot OSOYOO",
-  "short_name": "Robot",
+  "name": "MiraBot",
+  "short_name": "MiraBot",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#1a1a1a",
