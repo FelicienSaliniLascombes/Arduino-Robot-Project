@@ -110,10 +110,8 @@ const boutonsActions = [
   { id: "btnBas", cmd: "s" },
   { id: "btnAvantGauche", cmd: "a" },
   { id: "btnAvantDroite", cmd: "e" },
-  { id: "btnArriereGauche", cmd: "w" },
-  { id: "btnArriereDroite", cmd: "c" },
-  { id: "btnGauche", cmd: "q" },
-  { id: "btnDroite", cmd: "d" },
+  { id: "btnArriereGauche", cmd: "q" },
+  { id: "btnArriereDroite", cmd: "d" },
 ];
 
 boutonsActions.forEach((bouton) => {
@@ -154,22 +152,41 @@ function evaluerTouchesClavier() {
   const diagAvG = touchesActives.has("a");
   const diagAvD = touchesActives.has("e");
 
+  if ((haut || bas || gauche || droite || diagAvG || diagAvD) && modeAuto) {
+    modeAuto = false;
+    envoyerOrdre("w"); // On dit à l'Arduino de stopper l'auto
+    if (btnAuto) {
+      btnAuto.innerText = "Mode Auto : OFF";
+      btnAuto.classList.remove("actif");
+    }
+  }
+
   let commande = "f"; // Par défaut, Stop.
 
-  // 1. Priorité aux Diagonales (Si on appuie sur 2 touches en même temps)
-  if ((haut && gauche) || diagAvG)
-    commande = "a"; // Avant-Gauche
-  else if ((haut && droite) || diagAvD)
-    commande = "e"; // Avant-Droite
-  else if (bas && gauche)
-    commande = "w"; // Arrière-Gauche
-  else if (bas && droite)
-    commande = "c"; // Arrière-Droite
-  // 2. Ensuite, les lignes droites et pivots classiques
+  // --- LOGIQUE MULTI-TOUCHES (DIAGONALES) ---
+
+  // 1. Priorité Avant-Gauche (Z+Q ou Touche A)
+  if ((haut && gauche) || diagAvG) {
+    commande = "a";
+  }
+  // 2. Priorité Avant-Droite (Z+D ou Touche E)
+  else if ((haut && droite) || diagAvD) {
+    commande = "e";
+  }
+  // 3. NOUVEAU : Arrière-Gauche (S+Q)
+  else if (bas && gauche) {
+    commande = "q"; // 'q' dans ton Arduino est arriereGauche
+  }
+  // 4. NOUVEAU : Arrière-Droite (S+D)
+  else if (bas && droite) {
+    commande = "d"; // 'd' dans ton Arduino est arriereDroite
+  }
+  // 5. Mouvements simples
   else if (haut) commande = "z";
   else if (bas) commande = "s";
-  else if (gauche) commande = "q";
-  else if (droite) commande = "d";
+  else if (gauche)
+    commande = "q"; // Pivot gauche simple (ou arriere selon ton code)
+  else if (droite) commande = "d"; // Pivot droit simple (ou arriere selon ton code)
 
   // On envoie le résultat au robot
   changerEtatMouvement(commande);
@@ -329,4 +346,45 @@ if (sliderServo && valeurAngle) {
     valeurAngle.innerText = angle;
     envoyerOrdre("V" + angle);
   });
+}
+
+// Mode AUTO
+
+let modeAuto = false;
+const btnAuto = document.getElementById("btnAuto");
+
+if (btnAuto) {
+  btnAuto.addEventListener("click", () => {
+    modeAuto = !modeAuto;
+    if (modeAuto) {
+      envoyerOrdre("W"); // Commande ON
+      btnAuto.innerText = "Mode Auto : ON";
+      btnAuto.classList.add("actif");
+    } else {
+      envoyerOrdre("w"); // Commande OFF
+      btnAuto.innerText = "Mode Auto : OFF";
+      btnAuto.classList.remove("actif");
+    }
+  });
+}
+
+function changerEtatMouvement(nouvelleCommande) {
+  // --- REPRISE EN MAIN ---
+  // Si on reçoit un ordre de mouvement (autre que stop 'f') alors qu'on est en auto
+  if (modeAuto && nouvelleCommande !== "f") {
+    modeAuto = false;
+    envoyerOrdre("w"); // On envoie l'arrêt du mode auto à l'Arduino
+
+    // Mise à jour visuelle du bouton sur le site
+    if (btnAuto) {
+      btnAuto.innerText = "Mode Auto : OFF";
+      btnAuto.classList.remove("actif");
+    }
+  }
+
+  // Envoi de l'ordre s'il est différent de l'actuel
+  if (commandeEnCours !== nouvelleCommande) {
+    commandeEnCours = nouvelleCommande;
+    envoyerOrdre(nouvelleCommande);
+  }
 }

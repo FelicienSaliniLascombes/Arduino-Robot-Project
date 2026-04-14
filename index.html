@@ -11,7 +11,6 @@
   </head>
   <body>
     <h1>Contrôle du robot</h1>
-
     <div class="container-global">
       <div class="colonne-capteurs">
         <div class="panneau">
@@ -48,7 +47,18 @@
         </div>
 
         <div class="section-direction">
-          <h3>🕹️ Direction</h3>
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-bottom: 15px;
+            "
+          >
+            <h3 style="margin: 0">🕹️ Direction</h3>
+            <button id="btnAuto" class="btn-auto-mini">Mode Auto : OFF</button>
+          </div>
+
           <div class="manette">
             <button class="btn-dir" id="btnAvantGauche">↖️</button>
             <button class="btn-dir" id="btnHaut">⬆️</button>
@@ -64,7 +74,7 @@
 
         <div class="section-vision">
           <h3>👁️ Champ de vision</h3>
-          <input type="range" id="sliderServo" min="0" max="180" value="90" />
+          <input type="range" id="sliderServo" min="30" max="150" value="90" />
           <p>Angle : <span id="valeurAngle">90</span>°</p>
         </div>
       </div>

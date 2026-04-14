@@ -155,3 +155,22 @@ h1 {
     grid-template-columns: 1fr;
   }
 }
+
+.btn-auto-mini {
+  padding: 5px 12px;
+  font-size: 12px;
+  background-color: #444;
+  color: white;
+  border: 1px solid #666;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.btn-auto-mini.actif {
+  background-color: #dc3545; /* Rouge quand actif */
+  border-color: #ff4444;
+  box-shadow: 0 0 10px rgba(220, 53, 69, 0.4);
+}
