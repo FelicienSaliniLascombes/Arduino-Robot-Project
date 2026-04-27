@@ -9,8 +9,8 @@ body {
   text-align: center;
   margin: 0;
   padding: 20px;
-  background-color: #1a1a1a; /* Fond encore plus sombre */
-  color: #e0e0e0;
+  background-color: #1a1a1a; /* Fond principal très sombre */
+  color: #ffffff; /* Texte principal en blanc */
 }
 
 h1 {
@@ -18,7 +18,7 @@ h1 {
   font-weight: 300;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: #ffffff;
+  color: #9be4b7; /* Titre mis en valeur avec le vert d'accentuation */
 }
 
 /* --- Structure en colonnes (Dashboard) --- */
@@ -30,16 +30,16 @@ h1 {
   margin: 0 auto;
 }
 
-/* --- Style commun pour tous les blocs (Glassmorphism léger) --- */
+/* --- Style commun pour tous les blocs --- */
 .colonne-capteurs,
 .section-connexion,
 .section-direction,
 .section-vision {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #2d2d2d; /* Fond secondaire sombre pour les panneaux */
+  border: 1px solid #888888; /* Bordure discrète grise */
   border-radius: 16px;
   padding: 20px;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); /* Conservation de l'ombre pour la profondeur */
 }
 
 /* --- Colonne Gauche (Capteurs) --- */
@@ -50,23 +50,25 @@ h1 {
 }
 
 .panneau {
-  background: rgba(0, 0, 0, 0.2);
+  background: #1a1a1a; /* Retour au fond très sombre pour détacher les capteurs */
   padding: 15px;
   border-radius: 12px;
   text-align: left;
-  border-left: 4px solid #444; /* Petite barre discrète à gauche */
+  border-left: 4px solid #888888; /* Petite barre discrète grise */
   transition: all 0.3s ease;
 }
 
 .panneau:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: #1a1a1a; /* On garde le fond sombre pour ne pas fusionner avec le conteneur */
+  border-left: 4px solid #9be4b7; /* La barre devient verte */
   transform: translateX(5px);
+  box-shadow: 5px 5px 5px rgba(155, 228, 183, 0.6);
 }
 
 .panneau h3 {
   font-size: 14px;
   margin: 0;
-  color: #888;
+  color: #888888; /* Texte secondaire gris */
   text-transform: uppercase;
 }
 
@@ -74,6 +76,7 @@ h1 {
   margin: 8px 0 0 0;
   font-size: 22px;
   font-weight: 500;
+  color: #ffffff;
 }
 
 /* --- Colonne Droite (Commandes) --- */
@@ -87,8 +90,9 @@ h1 {
 #btnConnect {
   padding: 12px 25px;
   font-size: 16px;
-  background-color: #28a745;
-  color: white;
+  background-color: #9be4b7; /* Bouton principal vert */
+  color: #1a1a1a; /* Texte noir pour le contraste sur le vert */
+  font-weight: bold;
   border: none;
   border-radius: 50px;
   cursor: pointer;
@@ -96,8 +100,8 @@ h1 {
 }
 
 #btnConnect:hover {
-  background-color: #218838;
-  box-shadow: 0 0 15px rgba(40, 167, 69, 0.4);
+  background-color: #ffffff; /* Devient blanc au survol */
+  box-shadow: 0 0 15px rgba(155, 228, 183, 0.4); /* Halo vert fluo */
 }
 
 /* --- Manette --- */
@@ -114,39 +118,45 @@ h1 {
   width: 85px;
   height: 85px;
   font-size: 28px;
-  background-color: #333;
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: #1a1a1a; /* Fond des boutons directionnels */
+  color: #ffffff; /* Flèches en blanc */
+  border: 1px solid #888888; /* Bordure grise */
   border-radius: 15px;
   cursor: pointer;
   transition: all 0.2s;
 }
 
+.btn-dir:hover {
+  border-color: #9be4b7; /* La bordure s'éclaire en vert */
+  color: #9be4b7; /* L'icône/texte passe en vert */
+  box-shadow: 0 0 12px rgba(155, 228, 183, 0.3); /* Halo vert autour du bouton */
+}
+
 .btn-dir:active {
-  background-color: #007bff;
+  background-color: #9be4b7; /* Le bouton devient vert quand on appuie */
+  color: #1a1a1a;
+  border-color: #9be4b7;
   transform: scale(0.9);
 }
 
 #btnStop {
-  background-color: #b02a37;
+  background-color: #2d2d2d; /* Couleur différente pour se distinguer des flèches */
 }
 
 /* --- Vision / Slider --- */
 #sliderServo {
   width: 100%;
   margin: 20px 0;
-  accent-color: #007bff;
+  accent-color: #9be4b7; /* Curseur vert */
 }
 
 /* --- Couleurs dynamiques pour les valeurs --- */
-#valeurDistance {
-  color: #00d4ff;
-}
-#valeurTemperature {
-  color: #ff9800;
-}
-#valeurLumiere {
-  color: #ffeb3b;
+/* On harmonise avec la palette au lieu de toutes les couleurs (bleu, jaune, orange) */
+#valeurDistance,
+#valeurTemperature,
+#valeurLumiere,
+#valeurFeu {
+  color: #9be4b7;
 }
 
 /* Responsivité */
@@ -156,12 +166,13 @@ h1 {
   }
 }
 
+/* Mode Automatique */
 .btn-auto-mini {
   padding: 5px 12px;
   font-size: 12px;
-  background-color: #444;
-  color: white;
-  border: 1px solid #666;
+  background-color: #1a1a1a; /* Fond sombre par défaut */
+  color: #888888; /* Texte gris */
+  border: 1px solid #888888; /* Bordure grise */
   border-radius: 20px;
   cursor: pointer;
   transition: 0.3s;
@@ -170,7 +181,23 @@ h1 {
 }
 
 .btn-auto-mini.actif {
-  background-color: #dc3545; /* Rouge quand actif */
-  border-color: #ff4444;
-  box-shadow: 0 0 10px rgba(220, 53, 69, 0.4);
+  background-color: #9be4b7; /* Fond vert quand actif */
+  color: #1a1a1a; /* Texte foncé pour lisibilité */
+  border-color: #9be4b7;
+  box-shadow: 0 0 10px rgba(155, 228, 183, 0.4); /* Lueur verte au lieu du rouge d'origine */
+}
+
+/* Survol quand le mode auto est OFF */
+.btn-auto-mini:hover {
+  border-color: #ffffff;
+  color: #ffffff;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+}
+
+/* Survol quand le mode auto est ON (déjà vert, on l'intensifie) */
+.btn-auto-mini.actif:hover {
+  background-color: #ffffff; /* Le fond devient blanc au survol */
+  color: #1a1a1a; /* Texte sombre */
+  border-color: #ffffff;
+  box-shadow: 0 0 20px rgba(155, 228, 183, 0.6); /* Lueur verte plus intense */
 }
