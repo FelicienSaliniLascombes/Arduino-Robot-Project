@@ -306,7 +306,7 @@ function recevoirDonnees(event) {
       if (elemFeu) elemFeu.innerText = feu;
 
       if (alerte) {
-        if (feu > 70) {
+        if (feu > 700) {
           alerte.innerText = "🔥 FEU DÉTECTÉ !";
           alerte.style.color = "#ff4444";
         } else {
